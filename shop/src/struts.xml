@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" /> 
+	
+	<package name="control" extends="struts-default">
+		<global-results>
+			<result name="message" type="dispatcher">/WEB-INF/page/share/message.jsp</result>
+		</global-results>
+	</package>
+	
+	<package name="center" extends="control">
+		<!-- http://localhost/shop/control/center/main -->
+		<action name="main">
+			<result>/WEB-INF/page/controlcenter/default.jsp</result>
+		</action>
+		
+		<action name="top">
+			<result>/WEB-INF/page/controlcenter/top.jsp</result>
+		</action>
+		
+		<action name="menu">
+			<result>/WEB-INF/page/controlcenter/menu.jsp</result>
+		</action>
+		
+		<action name="right">
+			<result>/WEB-INF/page/controlcenter/right.jsp</result>
+		</action>
+		
+		<action name="buttom">
+			<result>/WEB-INF/page/controlcenter/end.jsp</result>
+		</action>
+	</package>
+	
+	<package name="product" extends="control">
+	</package>
+	
+	<package name="type" extends="product">
+		<!-- http://localhost/shop/control/product/type/list -->
+		<action name="list" class="com.kong.shop.action.product.ProductTypeAction">
+			<result name="success">/WEB-INF/product/producttypelist.jsp</result>
+		</action>
+		
+		<action name="manage" class="com.kong.shop.action.product.ProductTypeManageAction" method="*">
+			<result name="addUI">/WEB-INF/product/add_productType.jsp</result>
+		</action>
+		
+		
+	</package>
+</struts>
+	
