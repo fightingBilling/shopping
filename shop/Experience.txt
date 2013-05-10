@@ -1,0 +1,3 @@
+1. 根目录访问应用
+	在项目的.settings文件夹下修改org.eclipse.wst.common.component中的<property name="context-root" value=""/>，去除值
+	在tomcat config server.xml，Context节点中的path内容去除。

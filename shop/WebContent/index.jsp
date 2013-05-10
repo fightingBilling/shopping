@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1>Shop index</h1>
+	<img alt="s" src="/shop/images/A.gif">
 </body>
 </html>
