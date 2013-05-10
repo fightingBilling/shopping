@@ -53,6 +53,7 @@ public class ProductTypeManageAction extends ActionSupport {
 				ProductType parent = productTypeService.find(ProductType.class, parentid);
 				type.setParent(parent);
 			}
+			
 			productTypeService.save(type);
 			addActionMessage("Add Product Type Passed!");
 		}
