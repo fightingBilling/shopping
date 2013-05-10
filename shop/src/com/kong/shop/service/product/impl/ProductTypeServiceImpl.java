@@ -42,4 +42,9 @@ public class ProductTypeServiceImpl extends DaoSupport<ProductType> implements
 		query.executeUpdate();
 	}
 
+	@Override
+	public boolean checkNameExist(String name) {
+		return em.createQuery("from ProductType o where name=:name").setParameter("name", name).getResultList().size() > 0 ? true: false;
+	}
+
 }

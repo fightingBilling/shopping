@@ -11,6 +11,9 @@ public class PageView<T> {
 	private int maxResult = 12;
 	/** index of page including start page and end page **/
 	private PageIndex pageIndex;
+	
+	public PageView() {
+	}
 
 	public PageView(int currentPage) {
 		this.currentPage = currentPage;

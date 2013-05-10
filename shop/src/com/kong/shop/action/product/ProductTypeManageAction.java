@@ -14,15 +14,6 @@ public class ProductTypeManageAction extends ActionSupport {
 
 	private IProductTypeService productTypeService;
 	private ProductType type;
-	private Integer parentid;
-
-	public Integer getParentid() {
-		return parentid;
-	}
-
-	public void setParentid(Integer parentid) {
-		this.parentid = parentid;
-	}
 
 	public ProductType getType() {
 		return type;
@@ -46,17 +37,30 @@ public class ProductTypeManageAction extends ActionSupport {
 	}
 
 	public String add() {
+		// If name not define, go to global message page
 		if (type.getName() == null || "".equals(type.getName())) {
 			addActionError("Please give one name for product type which you defined.");
-		} else {
-			if(parentid > 1) {
-				ProductType parent = productTypeService.find(ProductType.class, parentid);
-				type.setParent(parent);
-			}
-			
-			productTypeService.save(type);
-			addActionMessage("Add Product Type Passed!");
+			return "message";
 		}
+
+		// If name exist, go to global message page
+		if (productTypeService.checkNameExist(type.getName().trim())) {
+			addActionError("Your given type name already exist, please change your type name.");
+			return "message";
+		}
+		
+		ProductType parent = null;
+		if (type.getParent().getTypeid() != null
+				&& type.getParent().getTypeid() > 0) {
+			parent = productTypeService.find(ProductType.class,
+					type.getParent().getTypeid());
+		}
+
+		// If no parent, then just save that type
+		type.setParent(parent);
+		productTypeService.save(type);
+		addActionMessage("Add Product Type Passed!");
+
 		return "message";
 	}
 }

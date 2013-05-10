@@ -47,7 +47,6 @@ public abstract class DaoSupport<T> implements IDAO<T> {
 		return em.find(entityClass, id);
 	}
 	
-	
 	@Transactional(readOnly = true, propagation = Propagation.NOT_SUPPORTED)
 	@Override
 	public QueryResult<T> getScrollData(Class<T> entityClass) {

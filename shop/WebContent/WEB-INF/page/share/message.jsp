@@ -23,6 +23,7 @@
 					  <tr>
 						<td width="253" height="60" align="center" valign="bottom" class="font12">
 							<p><s:actionmessage name="message"/>
+							<s:actionerror name="message"/>
 							</p>
 						</td>
 					  </tr>

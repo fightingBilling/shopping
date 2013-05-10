@@ -11,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.kong.shop.model.QueryResult;
 import com.kong.shop.service.product.IProductTypeService;
 
-public class testProductType {
+public class testProductTypeService {
 	private static IProductTypeService productService;
 	private static ApplicationContext ctx;
 
@@ -130,5 +130,10 @@ public class testProductType {
 			System.out.println(item.getName());
 		}
 		System.out.println(qr.getTotalRecord());
+	}
+	
+	@Test
+	public void testCheckNameExist() {
+		Assert.assertTrue(productService.checkNameExist("28test"));
 	}
 }

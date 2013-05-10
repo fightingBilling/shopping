@@ -4,4 +4,5 @@ import com.kong.shop.model.product.ProductType;
 import com.kong.shop.service.base.IDAO;
 
 public interface IProductTypeService extends IDAO<ProductType>{
+	public boolean checkNameExist(String name);
 }

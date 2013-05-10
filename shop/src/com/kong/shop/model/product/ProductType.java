@@ -29,6 +29,18 @@ public class ProductType implements Serializable {
 	private Set<ProductType> childtypes = new HashSet<ProductType>();
 	/* parent type, it can be only one or nothing */
 	private ProductType parent;
+	
+	public ProductType(Integer typeid) {
+		this.typeid = typeid;
+	}
+	
+	public ProductType() {
+	}
+
+	public ProductType(String name, String note) {
+		this.name = name;
+		this.note = note;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,7 +79,7 @@ public class ProductType implements Serializable {
 		this.visible = visible;
 	}
 
-	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.REMOVE }, mappedBy = "parent")
+	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.REMOVE}, mappedBy = "parent")
 	public Set<ProductType> getChildtypes() {
 		return childtypes;
 	}
@@ -109,6 +121,18 @@ public class ProductType implements Serializable {
 		} else if (!typeid.equals(other.typeid))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		if (parent != null) {
+			return "ProductType [typeid=" + typeid + ", name=" + name
+					+ ", visible=" + visible + ", parentid="
+					+ parent.getTypeid() + "]";
+		} else {
+			return "ProductType [typeid=" + typeid + ", name=" + name
+					+ ", visible=" + visible + ", parent is null" + "]";
+		}
 	}
 
 }

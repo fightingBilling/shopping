@@ -24,7 +24,8 @@ function checkfm(form){
 </head>
 <body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <s:form action="/control/product/type/manage!add" method="post"  onsubmit="return checkfm(this)">
-<s:hidden name="parentid"/>
+<s:hidden name="type.parent.typeid"/>
+
 <br>
   <table width="90%" border="0" cellspacing="2" cellpadding="3" align="center">
     <tr bgcolor="6f8ac4"><td colspan="2"  > <font color="#FFFFFF">添加类别：</font></td>

@@ -21,6 +21,7 @@
 <body bgcolor="#FFFFFF" text="#000000" marginwidth="0" marginheight="0">
 <s:form action="/control/product/type/list" method="post">
 	<s:hidden name="page"></s:hidden>
+	<!--<s:hidden name="type.parent.typeid"></s:hidden>-->
   <table width="98%" border="0" cellspacing="1" cellpadding="2" align="center">
     <%@ include file="/WEB-INF/page/share/paging.jsp" %>
     <tr>
@@ -37,8 +38,8 @@
       <td bgcolor="f5f5f5"> <div align="center">${entry.typeid }</div></td>
       <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url action="/control/product/type/manage"/>?method=editUI&typeid=${entry.typeid }">
 	  <img src="/images/edit.gif" width="15" height="16" border="0"></a></div></td>
-      <td bgcolor="f5f5f5"> <div align="center"><a href='<s:url action="/control/product/type/list"/>?parentid=${entry.typeid }'>${entry.name }</a> </div></td>
-	  <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url action="/control/product/type/manage"/>?method=addUI&parentid=${entry.typeid}">创建子类别</a></div></td>
+      <td bgcolor="f5f5f5"> <div align="center"><a href='<s:url action="/control/product/type/list"/>?type.typeid=${entry.typeid}'>${entry.name }</a> </div></td>
+	  <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url action="/control/product/type/manage!addUI"/>?type.parent.typeid=${entry.typeid}">创建子类别</a></div></td>
 	  <td bgcolor="f5f5f5" align="center"></td>
 	  <td bgcolor="f5f5f5">${entry.note }</td>
 	</tr>
@@ -49,7 +50,7 @@
           <tr> 
             <td width="5%"></td>
               <td width="85%">
-              <input name="AddDic" type="button" class="frm_btn" id="AddDic" onClick="javascript:window.location.href='<s:url action="/control/product/type/manage!addUI"/>?parentid=0'" value="添加类别"> &nbsp;&nbsp;
+              <input name="AddDic" type="button" class="frm_btn" id="AddDic" onClick="javascript:window.location.href='<s:url action="/control/product/type/manage!addUI"/>?type.parent.typeid=${type.typeid}'" value="添加类别"> &nbsp;&nbsp;
 			  <input name="query" type="button" class="frm_btn" id="query" onClick="javascript:window.location.href='<s:url action="/control/product/type/manage!queryUI"/>'" value=" 查 询 "> &nbsp;&nbsp;
             </td>
           </tr>

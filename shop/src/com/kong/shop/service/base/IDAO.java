@@ -36,7 +36,7 @@ public interface IDAO<T> {
 	 * @return
 	 */
 	public T find(Class<T> entityClass, Serializable id);
-
+	
 	/**
 	 * Query all results
 	 * 
