@@ -48,6 +48,7 @@
 		<action name="manage" class="com.kong.shop.action.product.ProductTypeManageAction" method="*">
 			<result name="addUI">/WEB-INF/product/add_productType.jsp</result>
 		</action>
+		
 	</package>
 </struts>
 	
