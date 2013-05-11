@@ -13,6 +13,7 @@ public class PageView<T> {
 	private PageIndex pageIndex;
 	
 	public PageView() {
+		this.currentPage = 1;
 	}
 
 	public PageView(int currentPage) {
