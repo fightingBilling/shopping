@@ -41,7 +41,7 @@
       <td bgcolor="f5f5f5"> <div align="center">${entry.typeid }</div></td>
       <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url action="/control/product/type/manage!editUI"/>?type.typeid=${entry.typeid }">
 	  <img src="/images/edit.gif" width="15" height="16" border="0"></a></div></td>
-      <td bgcolor="f5f5f5"> <div align="center"><a href='<s:url action="/control/product/type/list"/>?type.typeid=${entry.typeid}'>${entry.name }</a> </div></td>
+      <td bgcolor="f5f5f5"> <div align="center"><a href='<s:url action="/control/product/type/list"/>?type.typeid=${entry.typeid}'>${entry.name } <s:if test="#{entry.childtypes.size()} != ''"></s:if>  ( has ${entry.childtypes.size()} children types )</a> </div></td>
 	  <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url action="/control/product/type/manage!addUI"/>?type.parent.typeid=${entry.typeid}">创建子类别</a></div></td>
 	  <td bgcolor="f5f5f5" align="center"></td>
 	  <td bgcolor="f5f5f5">${entry.note }</td>
