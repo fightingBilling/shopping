@@ -10,7 +10,7 @@
 	//到指定的分页页面
 	function topage(page){
 		var form = document.forms[0];
-		form.page.value=page;
+		form.page.value = page;
 		form.submit();
 	}
 //-->
@@ -20,7 +20,10 @@
 
 <body bgcolor="#FFFFFF" text="#000000" marginwidth="0" marginheight="0">
 <s:form action="/control/product/type/list" method="post">
-	<s:hidden name="page"></s:hidden>
+	<s:hidden name="page" />
+	<!-- query and type.name is prepared for query type name function -->
+	<s:hidden name="query" />
+	<s:hidden name="type.name" />
 	<!--<s:hidden name="type.parent.typeid"></s:hidden>-->
   <table width="98%" border="0" cellspacing="1" cellpadding="2" align="center">
     <%@ include file="/WEB-INF/page/share/paging.jsp" %>
@@ -36,7 +39,7 @@
 <s:iterator value="pageView.qr.resultList" var="entry">
     <tr>
       <td bgcolor="f5f5f5"> <div align="center">${entry.typeid }</div></td>
-      <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url action="/control/product/type/manage"/>?method=editUI&typeid=${entry.typeid }">
+      <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url action="/control/product/type/manage!editUI"/>?type.typeid=${entry.typeid }">
 	  <img src="/images/edit.gif" width="15" height="16" border="0"></a></div></td>
       <td bgcolor="f5f5f5"> <div align="center"><a href='<s:url action="/control/product/type/list"/>?type.typeid=${entry.typeid}'>${entry.name }</a> </div></td>
 	  <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url action="/control/product/type/manage!addUI"/>?type.parent.typeid=${entry.typeid}">创建子类别</a></div></td>

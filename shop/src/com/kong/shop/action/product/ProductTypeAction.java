@@ -23,7 +23,17 @@ public class ProductTypeAction extends ActionSupport {
 	private ProductType type;
 	private PageView<ProductType> pageView;
 	private int page;
-	
+	// For query page
+	private boolean query;
+
+	public boolean isQuery() {
+		return query;
+	}
+
+	public void setQuery(boolean query) {
+		this.query = query;
+	}
+
 	public int getPage() {
 		return page;
 	}
@@ -71,19 +81,27 @@ public class ProductTypeAction extends ActionSupport {
 		StringBuffer wherejpql = new StringBuffer("o.visible = ?1");
 		List<Object> queryPositionParams = new ArrayList<Object>();
 		queryPositionParams.add(true);
-		
-		//First time to access list page, type is null object. It will throw nullpointexception
-		if(type == null) {
+
+		// First time to access list page, type is null object. It will throw
+		// nullpointexception
+		if (type == null) {
 			type = new ProductType();
 		}
-		
-		// Judge parentid has value or not
-		if (type.getTypeid() != null && type.getTypeid() > 0) {
-			wherejpql.append(" and o.parent = ?2");
-			queryPositionParams.add(type);
+
+		if (query) {
+			wherejpql.append(" and o.name like ?"
+					+ (queryPositionParams.size() + 1));
+			queryPositionParams.add("%" + type.getName() + "%");
 		} else {
-			// If no parentid then display root type names
-			wherejpql.append(" and o.parent is null");
+			// Judge parentid has value or not
+			if (type.getTypeid() != null && type.getTypeid() > 0) {
+				wherejpql.append(" and o.parent = ?"
+						+ (queryPositionParams.size() + 1));
+				queryPositionParams.add(type);
+			} else {
+				// If no parentid then display root type names
+				wherejpql.append(" and o.parent is null");
+			}
 		}
 
 		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();

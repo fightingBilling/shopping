@@ -63,4 +63,32 @@ public class ProductTypeManageAction extends ActionSupport {
 
 		return "message";
 	}
+	
+	public String editUI() {
+		Integer typeid = type.getTypeid();
+		type = productTypeService.find(ProductType.class, typeid);
+		return "editUI";
+	}
+
+	public String edit() {
+		// If name not define, go to global message page
+		if (type.getName() == null || "".equals(type.getName())) {
+			addActionError("Please give one name for product type which you defined.");
+			return "message";
+		}
+
+		// If name exist, go to global message page
+		if (productTypeService.checkNameExist(type.getName().trim())) {
+			addActionError("Your given type name already exist, please change your type name.");
+			return "message";
+		}
+		
+		productTypeService.update(type);
+		addActionMessage("Update Product Type Passed!");
+		return "message";
+	}
+	
+	public String queryUI() {
+		return "queryUI";
+	}
 }
