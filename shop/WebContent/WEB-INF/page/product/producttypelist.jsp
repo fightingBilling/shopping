@@ -10,7 +10,7 @@
 	//到指定的分页页面
 	function topage(page){
 		var form = document.forms[0];
-		form.page.value = page;
+		type.page = page;
 		form.submit();
 	}
 //-->
@@ -20,7 +20,7 @@
 
 <body bgcolor="#FFFFFF" text="#000000" marginwidth="0" marginheight="0">
 <s:form action="/control/product/type/list" method="post">
-	<s:hidden name="page" />
+	<s:hidden name="type.page" />
 	<!-- query and type.name is prepared for query type name function -->
 	<s:hidden name="query" />
 	<s:hidden name="type.name" />

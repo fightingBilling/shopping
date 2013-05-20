@@ -1,13 +1,11 @@
 package com.kong.shop.model.product;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Brand implements Serializable{
+public class Brand extends BaseBean{
 	private static final long serialVersionUID = 6417754934884647149L;
 	// UUID as code
 	private String code;
@@ -15,8 +13,8 @@ public class Brand implements Serializable{
 	private String name;
 	// href of logo path like '/image/brand/2013/05/19/11/sss.gif'
 	private String logopath;
-	// Visiable
-	private boolean visiable = true;
+	// visible
+	private boolean visible = true;
 	
 	public Brand(String name, String logopath) {
 		this.name = name;
@@ -48,12 +46,6 @@ public class Brand implements Serializable{
 	public void setLogopath(String logopath) {
 		this.logopath = logopath;
 	}
-	public boolean isVisiable() {
-		return visiable;
-	}
-	public void setVisiable(boolean visiable) {
-		this.visiable = visiable;
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,6 +68,20 @@ public class Brand implements Serializable{
 		} else if (!code.equals(other.code))
 			return false;
 		return true;
+	}
+
+	/**
+	 * @return the visible
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * @param visible the visible to set
+	 */
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 	
 	

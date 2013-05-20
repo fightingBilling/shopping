@@ -22,7 +22,6 @@ public class ProductTypeAction extends ActionSupport {
 	private IProductTypeService productTypeService;
 	private ProductType type;
 	private PageView<ProductType> pageView;
-	private int page;
 	// For query page
 	private boolean query;
 
@@ -32,14 +31,6 @@ public class ProductTypeAction extends ActionSupport {
 
 	public void setQuery(boolean query) {
 		this.query = query;
-	}
-
-	public int getPage() {
-		return page;
-	}
-
-	public void setPage(int page) {
-		this.page = page;
 	}
 
 	public PageView<ProductType> getPageView() {
@@ -73,8 +64,10 @@ public class ProductTypeAction extends ActionSupport {
 		// is 0. Even change value in set method.
 		// If directly accessing this action, it will set page as 0, so
 		// exception appears as firstindex will be -12
-		page = page < 1 ? 1 : page;
-		pageView = new PageView<ProductType>(page);
+		if (type == null) {
+			type = new ProductType();
+		}
+		pageView = new PageView<ProductType>(type.getPage(), 12);
 		int firstindex = (pageView.getCurrentPage() - 1)
 				* pageView.getMaxResult();
 
@@ -84,9 +77,7 @@ public class ProductTypeAction extends ActionSupport {
 
 		// First time to access list page, type is null object. It will throw
 		// nullpointexception
-		if (type == null) {
-			type = new ProductType();
-		}
+		
 
 		if (query) {
 			wherejpql.append(" and o.name like ?"

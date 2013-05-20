@@ -39,18 +39,36 @@
 	<package name="product" extends="control">
 	</package>
 	
+	<!-- product type package -->
 	<package name="type" extends="product">
 		<!-- http://localhost/shop/control/product/type/list -->
+		<!-- product type paging -->
 		<action name="list" class="com.kong.shop.action.product.ProductTypeAction" method="execute">
 			<result name="success">/WEB-INF/page/product/producttypelist.jsp</result>
 		</action>
 		
+		<!-- product type management page including add, edit, query -->
 		<action name="manage" class="com.kong.shop.action.product.ProductTypeManageAction" method="*">
 			<result name="addUI">/WEB-INF/page/product/add_productType.jsp</result>
 			<result name="editUI">/WEB-INF/page/product/edit_productType.jsp</result>
 			<result name="queryUI">/WEB-INF/page/product/query_productType.jsp</result>
 		</action>
+	</package>
+	
+	<!-- product type package -->
+	<package name="brand" extends="product">
+		<!-- http://localhost/shop/control/product/brand/list -->
+		<!-- product type paging -->
+		<action name="list" class="com.kong.shop.action.product.BrandAction" method="execute">
+			<result name="success">/WEB-INF/page/product/brandlist.jsp</result>
+		</action>
 		
+		<!-- product type management page including add, edit, query -->
+		<action name="manage" class="com.kong.shop.action.product.ProductTypeManageAction" method="*">
+			<result name="addUI">/WEB-INF/page/product/add_productType.jsp</result>
+			<result name="editUI">/WEB-INF/page/product/edit_productType.jsp</result>
+			<result name="queryUI">/WEB-INF/page/product/query_productType.jsp</result>
+		</action>
 	</package>
 </struts>
 	

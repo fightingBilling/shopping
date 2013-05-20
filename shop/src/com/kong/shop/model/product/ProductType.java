@@ -1,6 +1,5 @@
 package com.kong.shop.model.product;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class ProductType implements Serializable {
+public class ProductType extends BaseBean {
 	private static final long serialVersionUID = -2754227587882954443L;
 	/* type id */
 	private Integer typeid;
@@ -29,11 +28,11 @@ public class ProductType implements Serializable {
 	private Set<ProductType> childtypes = new HashSet<ProductType>();
 	/* parent type, it can be only one or nothing */
 	private ProductType parent;
-	
+
 	public ProductType(Integer typeid) {
 		this.typeid = typeid;
 	}
-	
+
 	public ProductType() {
 	}
 
@@ -79,7 +78,7 @@ public class ProductType implements Serializable {
 		this.visible = visible;
 	}
 
-	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.REMOVE}, mappedBy = "parent")
+	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.REMOVE }, mappedBy = "parent")
 	public Set<ProductType> getChildtypes() {
 		return childtypes;
 	}
