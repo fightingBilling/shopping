@@ -39,7 +39,7 @@ public class Brand extends BaseBean{
 		this.name = name;
 	}
 	
-	@Column(length = 50)
+	@Column(length = 80)
 	public String getLogopath() {
 		return logopath;
 	}

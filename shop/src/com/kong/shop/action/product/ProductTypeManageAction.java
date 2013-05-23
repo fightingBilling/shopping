@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 
 import com.kong.shop.model.product.ProductType;
 import com.kong.shop.service.product.IProductTypeService;
+import com.kong.shop.utils.SiteUrl;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
@@ -14,6 +15,15 @@ public class ProductTypeManageAction extends ActionSupport {
 
 	private IProductTypeService productTypeService;
 	private ProductType type;
+	private String urladdress = SiteUrl.read("control.product.type.list");
+
+	public String getUrladdress() {
+		return urladdress;
+	}
+
+	public void setUrladdress(String urladdress) {
+		this.urladdress = urladdress;
+	}
 
 	public ProductType getType() {
 		return type;
@@ -48,12 +58,12 @@ public class ProductTypeManageAction extends ActionSupport {
 			addActionError("Your given type name already exist, please change your type name.");
 			return "message";
 		}
-		
+
 		ProductType parent = null;
 		if (type.getParent().getTypeid() != null
 				&& type.getParent().getTypeid() > 0) {
-			parent = productTypeService.find(ProductType.class,
-					type.getParent().getTypeid());
+			parent = productTypeService.find(ProductType.class, type
+					.getParent().getTypeid());
 		}
 
 		// If no parent, then just save that type
@@ -63,7 +73,7 @@ public class ProductTypeManageAction extends ActionSupport {
 
 		return "message";
 	}
-	
+
 	public String editUI() {
 		Integer typeid = type.getTypeid();
 		type = productTypeService.find(ProductType.class, typeid);
@@ -82,12 +92,12 @@ public class ProductTypeManageAction extends ActionSupport {
 			addActionError("Your given type name already exist, please change your type name.");
 			return "message";
 		}
-		
+
 		productTypeService.update(type);
 		addActionMessage("Update Product Type Passed!");
 		return "message";
 	}
-	
+
 	public String queryUI() {
 		return "queryUI";
 	}

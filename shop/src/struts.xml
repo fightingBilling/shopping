@@ -55,7 +55,7 @@
 		</action>
 	</package>
 	
-	<!-- product type package -->
+	<!-- brand package -->
 	<package name="brand" extends="product">
 		<!-- http://localhost/shop/control/product/brand/list -->
 		<!-- product type paging -->
@@ -64,10 +64,11 @@
 		</action>
 		
 		<!-- product type management page including add, edit, query -->
-		<action name="manage" class="com.kong.shop.action.product.ProductTypeManageAction" method="*">
-			<result name="addUI">/WEB-INF/page/product/add_productType.jsp</result>
-			<result name="editUI">/WEB-INF/page/product/edit_productType.jsp</result>
-			<result name="queryUI">/WEB-INF/page/product/query_productType.jsp</result>
+		<action name="manage" class="com.kong.shop.action.product.BrandManageAction" method="*">
+			<param name="savePath">/images</param>
+			<result name="addUI">/WEB-INF/page/product/add_brand.jsp</result>
+			<result name="editUI">/WEB-INF/page/product/edit_brand.jsp</result>
+			<result name="queryUI">/WEB-INF/page/product/query_brand.jsp</result>
 		</action>
 	</package>
 </struts>

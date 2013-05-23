@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 
 import com.kong.shop.model.PageView;
+import com.kong.shop.model.QueryResult;
 import com.kong.shop.model.product.Brand;
 import com.kong.shop.service.product.IBrandService;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,7 +20,7 @@ public class BrandAction extends ActionSupport {
 	private IBrandService brandService;
 	private Brand brand;
 	private PageView<Brand> pageView;
-	
+
 	public IBrandService getBrandService() {
 		return brandService;
 	}
@@ -45,7 +46,8 @@ public class BrandAction extends ActionSupport {
 	}
 
 	/**
-	 * @param pageView the pageView to set
+	 * @param pageView
+	 *            the pageView to set
 	 */
 	public void setPageView(PageView<Brand> pageView) {
 		this.pageView = pageView;
@@ -53,8 +55,9 @@ public class BrandAction extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
-		if(brand == null) {
+		if (brand == null) {
 			brand = new Brand();
+			System.out.println("OK");
 		}
 		pageView = new PageView<Brand>(brand.getPage(), 12);
 		int firstindex = (pageView.getCurrentPage() - 1)
@@ -63,10 +66,22 @@ public class BrandAction extends ActionSupport {
 		StringBuffer wherejpql = new StringBuffer("o.visible = ?1");
 		List<Object> queryPositionParams = new ArrayList<Object>();
 		queryPositionParams.add(true);
-		
-		pageView.setQr(brandService.getScrollData(Brand.class, firstindex, pageView.getMaxResult(), wherejpql.toString(), queryPositionParams.toArray()));
-		
-		return super.execute();
+		if (brand.getName() != null && !"".equals(brand.getName())) {
+			wherejpql.append(" and o.name like ?"
+					+ (queryPositionParams.size() + 1));
+			queryPositionParams.add("%" + brand.getName() + "%");
+		}
+		QueryResult<Brand> qr = brandService.getScrollData(Brand.class,
+				firstindex, pageView.getMaxResult(), wherejpql.toString(),
+				queryPositionParams.toArray());
+		/*
+		 * if(qr.getTotalRecord() < 1) {
+		 * addActionError("Did not find your brand: " + brand.getName()); return
+		 * "message"; }
+		 */
+		pageView.setQr(qr);
+
+		return SUCCESS;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 
 import org.springframework.stereotype.Controller;
 
@@ -12,6 +13,7 @@ import com.kong.shop.model.PageView;
 import com.kong.shop.model.QueryResult;
 import com.kong.shop.model.product.ProductType;
 import com.kong.shop.service.product.IProductTypeService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
@@ -64,6 +66,8 @@ public class ProductTypeAction extends ActionSupport {
 		// is 0. Even change value in set method.
 		// If directly accessing this action, it will set page as 0, so
 		// exception appears as firstindex will be -12
+		
+		
 		if (type == null) {
 			type = new ProductType();
 		}
@@ -100,6 +104,10 @@ public class ProductTypeAction extends ActionSupport {
 		QueryResult<ProductType> qr = productTypeService.getScrollData(
 				ProductType.class, firstindex, pageView.getMaxResult(),
 				wherejpql.toString(), queryPositionParams.toArray(), orderby);
+		if(qr.getTotalRecord() < 1) {
+			addActionError("Did not find your product type:" + type.getName());
+			return "message";
+		}
 		pageView.setQr(qr);
 		System.out.println("total result" + pageView.getQr().getTotalRecord());
 		return SUCCESS;

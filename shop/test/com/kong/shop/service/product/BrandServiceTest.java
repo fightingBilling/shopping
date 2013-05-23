@@ -21,7 +21,13 @@ public class BrandServiceTest {
 
 	@Test
 	public void testSave() {
-		brandService.save(new Brand("nake/ÄÍ¿Ë", "/image/brand/2013/5/16/10/asdsfsdf.gif"));
+		brandService.save(new Brand("nake1/ÄÍ¿Ë1", "/image/brand/2013/5/16/10/asdsfsdf.gif"));
+	}
+	
+	@Test
+	public void testSaveMulti() {
+		brandService.save(new Brand("addida/°¢µÏ", "/image/brand/2013/5/16/10/addida.gif"));
+		brandService.save(new Brand("LiNing/ÀîÄş", "/image/brand/2013/5/16/10/lining.gif"));
 	}
 
 }
