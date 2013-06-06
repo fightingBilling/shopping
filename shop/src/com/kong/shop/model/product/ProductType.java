@@ -23,11 +23,13 @@ public class ProductType extends BaseBean {
 	/* note for google description or search engine */
 	private String note;
 	/* visible in page, default to see in page */
-	private boolean visible = true;
+	private Boolean visible = true;
 	/* children types belong to this type */
 	private Set<ProductType> childtypes = new HashSet<ProductType>();
 	/* parent type, it can be only one or nothing */
 	private ProductType parent;
+	
+	private Set<ProductInfo> products = new HashSet<ProductInfo>();
 
 	public ProductType(Integer typeid) {
 		this.typeid = typeid;
@@ -132,6 +134,21 @@ public class ProductType extends BaseBean {
 			return "ProductType [typeid=" + typeid + ", name=" + name
 					+ ", visible=" + visible + ", parent is null" + "]";
 		}
+	}
+
+	/**
+	 * @return the products
+	 */
+	@OneToMany(mappedBy="producttype", cascade=CascadeType.REMOVE)
+	public Set<ProductInfo> getProducts() {
+		return products;
+	}
+
+	/**
+	 * @param products the products to set
+	 */
+	public void setProducts(Set<ProductInfo> products) {
+		this.products = products;
 	}
 
 }

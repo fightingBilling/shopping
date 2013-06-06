@@ -13,7 +13,7 @@ import com.kong.shop.model.product.ProductType;
 import com.kong.shop.service.base.impl.DaoSupport;
 import com.kong.shop.service.product.IProductTypeService;
 
-@Service("productService")
+@Service("productTypeService")
 @Transactional
 public class ProductTypeServiceImpl extends DaoSupport<ProductType> implements
 		IProductTypeService {
@@ -43,8 +43,8 @@ public class ProductTypeServiceImpl extends DaoSupport<ProductType> implements
 	}
 
 	@Override
-	public boolean checkNameExist(String name) {
-		return em.createQuery("from ProductType o where name=:name").setParameter("name", name).getResultList().size() > 0 ? true: false;
+	public ProductType checkNameExist(String name) {
+		return (ProductType) em.createQuery("from ProductType o where o.name=:name").setParameter("name", name).getSingleResult();
 	}
 
 }

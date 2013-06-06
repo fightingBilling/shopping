@@ -10,39 +10,40 @@ import org.springframework.stereotype.Controller;
 import com.kong.shop.model.PageView;
 import com.kong.shop.model.QueryResult;
 import com.kong.shop.model.product.Brand;
+import com.kong.shop.model.product.ProductInfo;
 import com.kong.shop.service.product.IBrandService;
+import com.kong.shop.service.product.IProductService;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
-public class BrandAction extends ActionSupport {
-
-	private static final long serialVersionUID = -1267488545089517313L;
-	private IBrandService brandService;
-	private Brand brand;
-	private PageView<Brand> pageView;
+public class ProductInfoAction extends ActionSupport {
+	private static final long serialVersionUID = 8658503817058185616L;
+	private IProductService productService;
+	private ProductInfo product;
+	private PageView<ProductInfo> pageView;
 	private Integer page = 1;
 
-	public IBrandService getBrandService() {
-		return brandService;
+	public IProductService getProductService() {
+		return productService;
 	}
 
-	@Resource
-	public void setBrandService(IBrandService brandService) {
-		this.brandService = brandService;
+	@Resource(name = "productService")
+	public void setProductService(IProductService productService) {
+		this.productService = productService;
 	}
 
-	public Brand getBrand() {
-		return brand;
+	public ProductInfo getProduct() {
+		return product;
 	}
 
-	public void setBrand(Brand brand) {
-		this.brand = brand;
+	public void setProduct(ProductInfo product) {
+		this.product = product;
 	}
 
 	/**
 	 * @return the pageView
 	 */
-	public PageView<Brand> getPageView() {
+	public PageView<ProductInfo> getPageView() {
 		return pageView;
 	}
 
@@ -50,7 +51,7 @@ public class BrandAction extends ActionSupport {
 	 * @param pageView
 	 *            the pageView to set
 	 */
-	public void setPageView(PageView<Brand> pageView) {
+	public void setPageView(PageView<ProductInfo> pageView) {
 		this.pageView = pageView;
 	}
 
@@ -64,25 +65,25 @@ public class BrandAction extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
-		if (brand == null) {
-			brand = new Brand();
+		if (product == null) {
+			product = new ProductInfo();
 		}
-		brand.setPage(page > 0 ? page : 1);
-		pageView = new PageView<Brand>(brand.getPage(), 12);
+		product.setPage(page > 0 ? page : 1);
+		pageView = new PageView<ProductInfo>(product.getPage(), 12);
 		int firstindex = (pageView.getCurrentPage() - 1)
 				* pageView.getMaxResult();
 
 		StringBuffer wherejpql = new StringBuffer("o.visible = ?1");
 		List<Object> queryPositionParams = new ArrayList<Object>();
 		queryPositionParams.add(true);
-		if (brand.getName() != null && !"".equals(brand.getName())) {
+		if (product.getName() != null && !"".equals(product.getName())) {
 			wherejpql.append(" and o.name like ?"
 					+ (queryPositionParams.size() + 1));
-			queryPositionParams.add("%" + brand.getName() + "%");
+			queryPositionParams.add("%" + product.getName() + "%");
 		}
-		QueryResult<Brand> qr = brandService.getScrollData(Brand.class,
-				firstindex, pageView.getMaxResult(), wherejpql.toString(),
-				queryPositionParams.toArray());
+		QueryResult<ProductInfo> qr = productService.getScrollData(
+				ProductInfo.class, firstindex, pageView.getMaxResult(),
+				wherejpql.toString(), queryPositionParams.toArray());
 		/*
 		 * if(qr.getTotalRecord() < 1) {
 		 * addActionError("Did not find your brand: " + brand.getName()); return

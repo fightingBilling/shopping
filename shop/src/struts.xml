@@ -5,71 +5,97 @@
 
 <struts>
 	<constant name="struts.devMode" value="true"></constant>
-	<constant name="struts.ognl.allowStaticMethodAccess" value="true" /> 
-	
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+
 	<package name="control" extends="struts-default">
 		<global-results>
-			<result name="message" type="dispatcher">/WEB-INF/page/share/message.jsp</result>
+			<result name="message" type="dispatcher">/WEB-INF/page/share/message.jsp
+			</result>
 		</global-results>
 	</package>
-	
+
 	<package name="center" extends="control">
 		<!-- http://localhost/shop/control/center/main -->
 		<action name="main">
 			<result>/WEB-INF/page/controlcenter/default.jsp</result>
 		</action>
-		
+
 		<action name="top">
 			<result>/WEB-INF/page/controlcenter/top.jsp</result>
 		</action>
-		
+
 		<action name="menu">
 			<result>/WEB-INF/page/controlcenter/menu.jsp</result>
 		</action>
-		
+
 		<action name="right">
 			<result>/WEB-INF/page/controlcenter/right.jsp</result>
 		</action>
-		
+
 		<action name="buttom">
 			<result>/WEB-INF/page/controlcenter/end.jsp</result>
 		</action>
 	</package>
-	
-	<package name="product" extends="control">
+
+	<!-- product info package -->
+	<package name="product" extends="control" namespace="/control/product">
+		<!-- http://localhost/shop/control/product/list -->
+		<!-- product type paging -->
+		<action name="list" class="com.kong.shop.action.product.ProductInfoAction"
+			method="execute">
+			<result name="success">/WEB-INF/page/product/productlist.jsp</result>
+		</action>
+		<!-- product management page including add, edit, query -->
+		<action name="manage"
+			class="com.kong.shop.action.product.ProductInfoManageAction" method="*">
+			<param name="savePath">/images</param>
+			<result name="selectUI">/WEB-INF/page/product/productTypeSelect.jsp</result>
+			<result name="addUI">/WEB-INF/page/product/add_product.jsp</result>
+			<result name="editUI">/WEB-INF/page/product/edit_product.jsp</result>
+			<result name="queryUI">/WEB-INF/page/product/query_product.jsp</result>
+		</action>
 	</package>
-	
+
 	<!-- product type package -->
-	<package name="type" extends="product">
+	<package name="type" extends="product" namespace="/control/product/type">
 		<!-- http://localhost/shop/control/product/type/list -->
 		<!-- product type paging -->
-		<action name="list" class="com.kong.shop.action.product.ProductTypeAction" method="execute">
-			<result name="success">/WEB-INF/page/product/producttypelist.jsp</result>
+		<action name="list" class="com.kong.shop.action.product.ProductTypeAction"
+			method="execute">
+			<result name="success">/WEB-INF/page/product/producttypelist.jsp
+			</result>
 		</action>
-		
+
 		<!-- product type management page including add, edit, query -->
-		<action name="manage" class="com.kong.shop.action.product.ProductTypeManageAction" method="*">
-			<result name="addUI">/WEB-INF/page/product/add_productType.jsp</result>
-			<result name="editUI">/WEB-INF/page/product/edit_productType.jsp</result>
-			<result name="queryUI">/WEB-INF/page/product/query_productType.jsp</result>
+		<action name="manage"
+			class="com.kong.shop.action.product.ProductTypeManageAction" method="*">
+			<result name="addUI">/WEB-INF/page/product/add_productType.jsp
+			</result>
+			<result name="editUI">/WEB-INF/page/product/edit_productType.jsp
+			</result>
+			<result name="queryUI">/WEB-INF/page/product/query_productType.jsp
+			</result>
 		</action>
 	</package>
-	
+
 	<!-- brand package -->
-	<package name="brand" extends="product">
+	<package name="brand" extends="product" namespace="/control/product/brand">
 		<!-- http://localhost/shop/control/product/brand/list -->
 		<!-- product type paging -->
-		<action name="list" class="com.kong.shop.action.product.BrandAction" method="execute">
+		<action name="list" class="com.kong.shop.action.product.BrandAction"
+			method="execute">
 			<result name="success">/WEB-INF/page/product/brandlist.jsp</result>
 		</action>
-		
+
 		<!-- product type management page including add, edit, query -->
-		<action name="manage" class="com.kong.shop.action.product.BrandManageAction" method="*">
+		<action name="manage" class="com.kong.shop.action.product.BrandManageAction"
+			method="*">
 			<param name="savePath">/images</param>
 			<result name="addUI">/WEB-INF/page/product/add_brand.jsp</result>
 			<result name="editUI">/WEB-INF/page/product/edit_brand.jsp</result>
 			<result name="queryUI">/WEB-INF/page/product/query_brand.jsp</result>
 		</action>
 	</package>
+
 </struts>
 	

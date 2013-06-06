@@ -10,7 +10,7 @@
 	//到指定的分页页面
 	function topage(page){
 		var form = document.forms[0];
-		brand.page = page;
+		form.page.value = page;
 		form.submit();
 	}
 //-->
@@ -19,9 +19,9 @@
 </head>
 
 <body bgcolor="#FFFFFF" text="#000000" marginwidth="0" marginheight="0">
-<s:form action="/control/brand/list" method="post">
-<s:hidden property="brand.page"/>
-<s:hidden property="brand.name"/>
+<s:form action="/control/product/brand/list" method="post">
+<s:hidden name="page"/>
+<s:hidden name="brand.name"/>
   <table width="98%" border="0" cellspacing="1" cellpadding="2" align="center">
     <tr ><td colspan="4" bgcolor="6f8ac4" align="right">
     	<%@ include file="/WEB-INF/page/share/paging.jsp" %>

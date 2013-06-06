@@ -23,6 +23,11 @@ public class Brand extends BaseBean{
 	
 	public Brand() {
 	}
+	
+	public Brand(String code) {
+		this.code = code;
+	}
+	
 	@Id @Column(length = 36, nullable = false)
 	public String getCode() {
 		return code;
@@ -83,6 +88,10 @@ public class Brand extends BaseBean{
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Brand [code=" + code + ", name=" + name + "]";
+	}
 	
 }

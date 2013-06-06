@@ -24,6 +24,7 @@ public class ProductTypeAction extends ActionSupport {
 	private IProductTypeService productTypeService;
 	private ProductType type;
 	private PageView<ProductType> pageView;
+	private Integer page = 1;
 	// For query page
 	private boolean query;
 
@@ -55,9 +56,17 @@ public class ProductTypeAction extends ActionSupport {
 		return productTypeService;
 	}
 
-	@Resource(name = "productService")
+	@Resource(name = "productTypeService")
 	public void setProductTypeService(IProductTypeService productTypeService) {
 		this.productTypeService = productTypeService;
+	}
+
+	public Integer getPage() {
+		return page;
+	}
+
+	public void setPage(Integer page) {
+		this.page = page;
 	}
 
 	@Override
@@ -66,11 +75,11 @@ public class ProductTypeAction extends ActionSupport {
 		// is 0. Even change value in set method.
 		// If directly accessing this action, it will set page as 0, so
 		// exception appears as firstindex will be -12
-		
-		
+
 		if (type == null) {
 			type = new ProductType();
 		}
+		type.setPage(page > 0 ? page : 1);
 		pageView = new PageView<ProductType>(type.getPage(), 12);
 		int firstindex = (pageView.getCurrentPage() - 1)
 				* pageView.getMaxResult();
@@ -81,7 +90,6 @@ public class ProductTypeAction extends ActionSupport {
 
 		// First time to access list page, type is null object. It will throw
 		// nullpointexception
-		
 
 		if (query) {
 			wherejpql.append(" and o.name like ?"
@@ -90,9 +98,9 @@ public class ProductTypeAction extends ActionSupport {
 		} else {
 			// Judge parentid has value or not
 			if (type.getTypeid() != null && type.getTypeid() > 0) {
-				wherejpql.append(" and o.parent = ?"
+				wherejpql.append(" and o.parent.typeid = ?"
 						+ (queryPositionParams.size() + 1));
-				queryPositionParams.add(type);
+				queryPositionParams.add(type.getTypeid());
 			} else {
 				// If no parentid then display root type names
 				wherejpql.append(" and o.parent is null");
@@ -104,7 +112,7 @@ public class ProductTypeAction extends ActionSupport {
 		QueryResult<ProductType> qr = productTypeService.getScrollData(
 				ProductType.class, firstindex, pageView.getMaxResult(),
 				wherejpql.toString(), queryPositionParams.toArray(), orderby);
-		if(qr.getTotalRecord() < 1) {
+		if (qr.getTotalRecord() < 1) {
 			addActionError("Did not find your product type:" + type.getName());
 			return "message";
 		}

@@ -4,13 +4,13 @@ function winOpen (strURL,strName,width,height)
     if (theWindow.opener == null) theWindow.opener = window;
     if (window.focus) theWindow.focus();
 }
-//验证邮件
+//楠岃瘉閭欢
 function verifyEmailAddress(strEmail){
   var myReg = /^[_a-zA-Z0-9_-_._-]+@([_a-zA-Z0-9_-]+\.)+[a-zA-Z]{2,3}$/;
   return myReg.test(strEmail);
 }
 /*****************************************************************
-****                     判断是否为日期数据  (lhm)       例子:itIsDate("2009-10-7" , "-")    *****
+****                     鍒ゆ柇鏄惁涓烘棩鏈熸暟鎹� (lhm)       渚嬪瓙:itIsDate("2009-10-7" , "-")    *****
 *****************************************************************/
 function itIsDate(DateString , Dilimeter) 
 { 
@@ -37,7 +37,7 @@ function itIsDate(DateString , Dilimeter)
    tempd = tempArray[1]; 
   } 
   tempm = tempArray[1]; 
-  var tDateString = tempy + '/'+tempm + '/'+tempd+' 8:0:0';//加八小时是因为我们处于东八区 
+  var tDateString = tempy + '/'+tempm + '/'+tempd+' 8:0:0';//鍔犲叓灏忔椂鏄洜涓烘垜浠浜庝笢鍏尯 
   var tempDate = new Date(tDateString); 
   if (isNaN(tempDate)) 
    return false; 
@@ -52,7 +52,7 @@ function itIsDate(DateString , Dilimeter)
 } 
 
 /*****************************************************************
-****                   求字符串的字节长度     (lhm)          *****
+****                   姹傚瓧绗︿覆鐨勫瓧鑺傞暱搴�    (lhm)          *****
 *****************************************************************/
 function byteLength(paraString) 
 {
@@ -70,7 +70,7 @@ function byteLength(paraString)
 }
 
 /*****************************************************************
-****                     去除空格     (lhm)                 *****
+****                     鍘婚櫎绌烘牸     (lhm)                 *****
 *****************************************************************/
 function trim(stringToTrim) {
 	return stringToTrim.replace(/^\s+|\s+$/g,"");
@@ -88,7 +88,7 @@ String.prototype.trim = function() {return this.replace(/^\s+|\s+$/g,"");}
 String.prototype.ltrim = function() {return this.replace(/^\s+/,"");}
 String.prototype.rtrim = function() {return this.replace(/\s+$/,"");}
 /*****************************************************************
-****               复选框的全选与取消     (LHM)              *****
+****               澶嶉�妗嗙殑鍏ㄩ�涓庡彇娑�    (LHM)              *****
 *****************************************************************/
 function CheckAll(form){
 	var length = form.itemId.length;
@@ -107,12 +107,12 @@ function CheckAll(form){
 }
 
 /*****************************************************************
-****                     删除处理     (LHM)                  *****
+****                     鍒犻櫎澶勭悊     (LHM)                  *****
 *****************************************************************/
 function del_btn (form,strMsg,actionurl){
   	var result = false;
   	var length = form.itemId.length;	
-	if (form.itemId.checked) { //只有一条记录时执行此语句
+	if (form.itemId.checked) { //鍙湁涓�潯璁板綍鏃舵墽琛屾璇彞
 		result = true;	
 	}  		
 	for (var i=0; i<length; i++){ 
@@ -122,7 +122,7 @@ function del_btn (form,strMsg,actionurl){
 		}		 		
 	}
     if (!result){
-		alert ("没有选择任何项目!");
+		alert ("娌℃湁閫夋嫨浠讳綍椤圭洰!");
 		return false;
     }else{
 		if (confirm('\n'+strMsg)){
@@ -134,7 +134,7 @@ function del_btn (form,strMsg,actionurl){
 }
 
 /*****************************************************************
-****                    转化字符串     (LHM)                 *****
+****                    杞寲瀛楃涓�    (LHM)                 *****
 *****************************************************************/
 function conversion_code(paraString)
 {
@@ -151,10 +151,10 @@ function conversion_code(paraString)
 }
 
 /*****************************************************************
-****                 数字输入控制处理     (LHM)              *****
+****                 鏁板瓧杈撳叆鎺у埗澶勭悊     (LHM)              *****
 *****************************************************************/
 function InputIntNumberCheck(){
-	//为支持IE 或 Netscape
+	//涓烘敮鎸両E 鎴�Netscape
 	var theEvent=window.event || arguments.callee.caller.arguments[0]; 
 	var elm ;
 	var ver = navigator.appVersion;
@@ -172,7 +172,7 @@ function InputIntNumberCheck(){
 }
 
 /*****************************************************************
-****          有小数点数字输入控制处理     (LHM)             *****
+****          鏈夊皬鏁扮偣鏁板瓧杈撳叆鎺у埗澶勭悊     (LHM)             *****
 *****************************************************************/
 function InputLongNumberCheck(){
 	if ( !((window.event.keyCode >=48)&&(window.event.keyCode<=57) || window.event.keyCode ==46)){
@@ -195,7 +195,7 @@ function InputLongNumberCheck(){
 }
 
 /*****************************************************************
-****                        换页处理                         *****
+****                        鎹㈤〉澶勭悊                         *****
 *****************************************************************/
 function toWhichPage(objform, whichPage){
     objform.whichPage.value = whichPage;
@@ -203,7 +203,7 @@ function toWhichPage(objform, whichPage){
 }
 
 /*************************liuxch   *******************************
-****                        获取cookie内容                   *****
+****                        鑾峰彇cookie鍐呭                   *****
 *****************************************************************/
 function getCookie( name ){
 	var nameOfCookie = name + "=";
@@ -222,7 +222,7 @@ function getCookie( name ){
 }
 
 /*****************************************************************
-****                    设置cookie内容、过期时间              *****
+****                    璁剧疆cookie鍐呭銆佽繃鏈熸椂闂�             *****
 *****************************************************************/
 function setCookie( name, value, expiredays ) { 
 	var todayDate = new Date(); 
@@ -230,9 +230,9 @@ function setCookie( name, value, expiredays ) {
 	document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";" 
 } 
 /*****************************************************************
-****                      检查输入字符    (lhm)              *****
-'//		 islegality：输入的字符是否为给定的字符
-'//返回值：bool
+****                      妫�煡杈撳叆瀛楃    (lhm)              *****
+'//		 islegality锛氳緭鍏ョ殑瀛楃鏄惁涓虹粰瀹氱殑瀛楃
+'//杩斿洖鍊硷細bool
 *****************************************************************/
 function islegality(checkstrpass){
 var checkokpass="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -243,14 +243,14 @@ for (i=0; i<checkstrpass.length; i++) {
         break;
         }
       if (j==checkokpass.length){
-	  return false; //函有特别字符时返回false
+	  return false; //鍑芥湁鐗瑰埆瀛楃鏃惰繑鍥瀎alse
       break;
         }
   }
    return true;
 }
 /**
-* 检查输入是否中文
+* 妫�煡杈撳叆鏄惁涓枃
 */
 function ck_chinese(value_) {
   return escape(value_).indexOf("%u")!=-1 

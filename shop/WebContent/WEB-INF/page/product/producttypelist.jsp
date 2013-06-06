@@ -10,7 +10,7 @@
 	//到指定的分页页面
 	function topage(page){
 		var form = document.forms[0];
-		type.page = page;
+		form.page.value = page;
 		form.submit();
 	}
 //-->
@@ -20,13 +20,15 @@
 
 <body bgcolor="#FFFFFF" text="#000000" marginwidth="0" marginheight="0">
 <s:form action="/control/product/type/list" method="post">
-	<s:hidden name="type.page" />
+	<s:hidden name="page" />
 	<!-- query and type.name is prepared for query type name function -->
 	<s:hidden name="query" />
 	<s:hidden name="type.name" />
 	<!--<s:hidden name="type.parent.typeid"></s:hidden>-->
   <table width="98%" border="0" cellspacing="1" cellpadding="2" align="center">
-    <%@ include file="/WEB-INF/page/share/paging.jsp" %>
+   <tr ><td colspan="6" bgcolor="6f8ac4" align="right">
+    	<%@ include file="/WEB-INF/page/share/paging.jsp" %>
+   </td></tr>
     <tr>
       <td width="8%" bgcolor="6f8ac4"> <div align="center"><font color="#FFFFFF">代号</font></div></td>
       <td width="5%" nowrap bgcolor="6f8ac4"> <div align="center"><font color="#FFFFFF">修改</font></div></td>
@@ -39,10 +41,10 @@
 <s:iterator value="pageView.qr.resultList" var="entry">
     <tr>
       <td bgcolor="f5f5f5"> <div align="center">${entry.typeid }</div></td>
-      <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url action="/control/product/type/manage!editUI"/>?type.typeid=${entry.typeid }">
+      <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url value="/control/product/type/manage!editUI"/>?type.typeid=${entry.typeid }">
 	  <img src="/images/edit.gif" width="15" height="16" border="0"></a></div></td>
-      <td bgcolor="f5f5f5"> <div align="center"><a href='<s:url action="/control/product/type/list"/>?type.typeid=${entry.typeid}'>${entry.name } <s:if test="#{entry.childtypes.size()} != ''"></s:if>  ( has ${entry.childtypes.size()} children types )</a> </div></td>
-	  <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url action="/control/product/type/manage!addUI"/>?type.parent.typeid=${entry.typeid}">创建子类别</a></div></td>
+      <td bgcolor="f5f5f5"> <div align="center"><a href='<s:url value="/control/product/type/list"/>?type.typeid=${entry.typeid}'>${entry.name } <s:if test="#entry.childtypes.size()!=0">( has ${entry.childtypes.size()} children types )</s:if>  </a> </div></td>
+	  <td bgcolor="f5f5f5"> <div align="center"><a href="<s:url value="/control/product/type/manage!addUI"/>?type.parent.typeid=${entry.typeid}">创建子类别</a></div></td>
 	  <td bgcolor="f5f5f5" align="center"></td>
 	  <td bgcolor="f5f5f5">${entry.note }</td>
 	</tr>

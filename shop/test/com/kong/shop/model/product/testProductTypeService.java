@@ -134,6 +134,6 @@ public class testProductTypeService {
 	
 	@Test
 	public void testCheckNameExist() {
-		Assert.assertTrue(productService.checkNameExist("28test"));
+		Assert.assertTrue(productService.checkNameExist("28test")==null);
 	}
 }

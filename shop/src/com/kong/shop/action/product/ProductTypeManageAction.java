@@ -4,15 +4,17 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 
+import com.kong.shop.model.product.ProductInfo;
 import com.kong.shop.model.product.ProductType;
+import com.kong.shop.service.product.IProductService;
 import com.kong.shop.service.product.IProductTypeService;
 import com.kong.shop.utils.SiteUrl;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
 public class ProductTypeManageAction extends ActionSupport {
-	private static final long serialVersionUID = -6956692923392743452L;
 
+	private static final long serialVersionUID = -7678168502258176802L;
 	private IProductTypeService productTypeService;
 	private ProductType type;
 	private String urladdress = SiteUrl.read("control.product.type.list");
@@ -25,21 +27,22 @@ public class ProductTypeManageAction extends ActionSupport {
 		this.urladdress = urladdress;
 	}
 
+
+	public IProductTypeService getProductTypeService() {
+		return productTypeService;
+	}
+
+	@Resource(name="productTypeService")
+	public void setProductTypeService(IProductTypeService productTypeService) {
+		this.productTypeService = productTypeService;
+	}
+
 	public ProductType getType() {
 		return type;
 	}
 
 	public void setType(ProductType type) {
 		this.type = type;
-	}
-
-	public IProductTypeService getProductTypeService() {
-		return productTypeService;
-	}
-
-	@Resource
-	public void setProductTypeService(IProductTypeService productTypeService) {
-		this.productTypeService = productTypeService;
 	}
 
 	public String addUI() {
@@ -54,20 +57,11 @@ public class ProductTypeManageAction extends ActionSupport {
 		}
 
 		// If name exist, go to global message page
-		if (productTypeService.checkNameExist(type.getName().trim())) {
+		/*if (productService.checkNameExist(product.getName().trim())) {
 			addActionError("Your given type name already exist, please change your type name.");
 			return "message";
-		}
+		}*/
 
-		ProductType parent = null;
-		if (type.getParent().getTypeid() != null
-				&& type.getParent().getTypeid() > 0) {
-			parent = productTypeService.find(ProductType.class, type
-					.getParent().getTypeid());
-		}
-
-		// If no parent, then just save that type
-		type.setParent(parent);
 		productTypeService.save(type);
 		addActionMessage("Add Product Type Passed!");
 
@@ -75,8 +69,8 @@ public class ProductTypeManageAction extends ActionSupport {
 	}
 
 	public String editUI() {
-		Integer typeid = type.getTypeid();
-		type = productTypeService.find(ProductType.class, typeid);
+		Integer id = type.getTypeid();
+		type = productTypeService.find(ProductType.class, id);
 		return "editUI";
 	}
 
@@ -87,11 +81,6 @@ public class ProductTypeManageAction extends ActionSupport {
 			return "message";
 		}
 
-		// If name exist, go to global message page
-		if (productTypeService.checkNameExist(type.getName().trim())) {
-			addActionError("Your given type name already exist, please change your type name.");
-			return "message";
-		}
 
 		productTypeService.update(type);
 		addActionMessage("Update Product Type Passed!");

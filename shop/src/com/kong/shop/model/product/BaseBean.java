@@ -9,13 +9,13 @@ import java.io.Serializable;
  */
 public class BaseBean implements Serializable{
 	private static final long serialVersionUID = 5785731755903321871L;
-	private int page = 1;
+	private Integer page = 1;
 
-	public int getPage() {
+	public Integer getPage() {
 		return page;
 	}
 
-	public void setPage(int page) {
+	public void setPage(Integer page) {
 		this.page = page < 1 ? 1 : page;
 	}
 }
